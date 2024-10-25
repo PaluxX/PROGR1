@@ -17,6 +17,12 @@ public class PlayerMov : MonoBehaviour
     [Header("Inputs")]
     [SerializeField] private KeyCode _atkKey = KeyCode.Mouse0;
 
+    [Header("Ataque")]
+    [SerializeField] private int _atackDmg = 51;
+    [SerializeField] private Transform _atckOrigin;
+    [SerializeField] private float _atckRayDistance = 3f;
+    [SerializeField] private LayerMask _atckLayer;
+
 
     private float _xAxis = 0f, _zAxis = 0f;
     private Vector3 _dir = new();
@@ -24,14 +30,23 @@ public class PlayerMov : MonoBehaviour
     private Animator _anim;
     private Rigidbody _rb;
 
+
+    private Ray _atckRay;
+    private RaycastHit _atckHit;
+
     private void Awake()
     {
+        GameManager.Instance.Player = this;
         _rb= GetComponent<Rigidbody>();
         _rb.constraints= RigidbodyConstraints.FreezeRotation;
+
+       
     }
 
     private void Start()
     {
+       
+
         _anim=GetComponentInChildren<Animator>();
     }
 
@@ -69,6 +84,14 @@ public class PlayerMov : MonoBehaviour
 
     public void Attack() 
     {
-        Debug.Log("Golpe");
+        _atckRay = new Ray(_atckOrigin.position, transform.forward);
+
+        if (Physics.Raycast(_atckRay, out _atckHit, _atckRayDistance, _atckLayer))
+        {
+            if (_atckHit.collider.TryGetComponent<Enemy>(out Enemy enemy))
+            {
+                enemy.TakeDmg(_atackDmg);
+            }
+        }
     }
 }
