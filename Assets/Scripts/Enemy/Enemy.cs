@@ -46,8 +46,6 @@ public class Enemy : MonoBehaviour
 
     public void Initialize()
     {
-        
-
         _actualNode = GetNode();
 
         _agent.SetDestination(_actualNode.position);

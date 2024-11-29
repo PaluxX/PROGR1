@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    [SerializeField]
     private PlayerMov _player;
     
     public PlayerMov Player

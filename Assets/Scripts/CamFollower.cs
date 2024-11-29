@@ -5,9 +5,9 @@ using UnityEngine;
 public class CamFollower : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] private Transform _posTp;
-    [SerializeField] private Transform _target;
     [SerializeField] private Transform _player;
+    //[SerializeField] private Transform _posTp;
+    [SerializeField] private Vector3 _offset;
 
     [Header("Rotacion")]
     [SerializeField] private float _rotSense;
@@ -24,8 +24,8 @@ public class CamFollower : MonoBehaviour
     private void LateUpdate()
     {
         Cam();
-        transform.position = _posTp.position;
-        transform.LookAt(_player);
+        transform.position = _player.transform.position + _offset;
+        //transform.LookAt(_player);
 
     }
     /// <summary>
@@ -38,7 +38,7 @@ public class CamFollower : MonoBehaviour
         _mouseY = Mathf.Clamp(_mouseY, _rotMin, _rotMax);
 
 
-        _target.rotation = Quaternion.Euler(_mouseY, _mouseX, 0.0f);
+        transform.rotation = Quaternion.Euler(_mouseY, _mouseX, 0.0f);
         _player.rotation = Quaternion.Euler(0.0f, _mouseX, 0.0f);
 
     }
