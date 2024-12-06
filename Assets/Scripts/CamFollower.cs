@@ -6,7 +6,7 @@ public class CamFollower : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private Transform _player;
-    //[SerializeField] private Transform _posTp;
+  //-  [SerializeField] private Transform _posTp;
     [SerializeField] private Vector3 _offset;
 
     [Header("Rotacion")]
@@ -25,7 +25,7 @@ public class CamFollower : MonoBehaviour
     {
         Cam();
         transform.position = _player.transform.position + _offset;
-        //transform.LookAt(_player);
+       // transform.LookAt(_player);
 
     }
     /// <summary>
@@ -39,7 +39,7 @@ public class CamFollower : MonoBehaviour
 
 
         transform.rotation = Quaternion.Euler(_mouseY, _mouseX, 0.0f);
-        _player.rotation = Quaternion.Euler(0.0f, _mouseX, 0.0f);
+       _player.rotation = Quaternion.Euler(0.0f, _mouseX, 0.0f);
 
     }
 }

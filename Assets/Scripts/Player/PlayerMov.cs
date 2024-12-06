@@ -12,9 +12,9 @@ public class PlayerMov : MonoBehaviour
     [SerializeField] private string _zName = "zAxis";
 
     [Header("Movement")]
-    [SerializeField] private float _movSpeed = 3f;
+    [SerializeField] public float movSpeed = 3f;
 
-    [Header("Inputs")]
+    [Header("Teclas")]
     [SerializeField] private KeyCode _atkKey = KeyCode.Mouse0;
 
     [Header("Ataque")]
@@ -23,6 +23,11 @@ public class PlayerMov : MonoBehaviour
     [SerializeField] private float _atckRayDistance = 3f;
     [SerializeField] private LayerMask _atckLayer;
 
+    
+
+
+
+    
 
     private float _xAxis = 0f, _zAxis = 0f;
     private Vector3 _dir = new();
@@ -79,7 +84,7 @@ public class PlayerMov : MonoBehaviour
     {
         _dir = (transform.right * xAxis + transform.forward * zAxis).normalized;
 
-       _rb.MovePosition(transform.position+_dir*_movSpeed*Time.deltaTime);
+       _rb.MovePosition(transform.position+_dir*movSpeed*Time.deltaTime);
     }
 
     public void Attack() 
